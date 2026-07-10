@@ -1,0 +1,37 @@
+name: Metrics
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+          user: ederson-lehugeur
+
+          filename: assets/metrics.svg
+
+          template: classic
+
+          base: header, activity, community, repositories, metadata
+
+          plugin_languages: yes
+          plugin_languages_sections: most-used
+          plugin_languages_limit: 8
+
+          plugin_isocalendar: yes
+
+          plugin_stars: yes
+
+          plugin_achievements: yes
